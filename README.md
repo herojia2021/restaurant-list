@@ -44,7 +44,7 @@ npm run start
 
 ## 運行截圖
 
-empty
+![首頁](/public/img/index.png)
 
 ## 相依套件
 
