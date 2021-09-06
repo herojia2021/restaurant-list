@@ -30,7 +30,7 @@ app.get("/search", (req, res) => {
   const restaurants = restaurantData.results.filter((restaurant) => {
     return restaurant.name.toLowerCase().includes(lowerCaseKeyword) || restaurant.category.toLowerCase().includes(lowerCaseKeyword)
   })
-  res.render("search", { restaurants, keyword })
+  res.render("index", { restaurants, keyword })
 })
 
 // Listen the server when it started
