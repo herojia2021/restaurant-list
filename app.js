@@ -1,36 +1,58 @@
 const express = require("express")
+const exphbs = require("express-handlebars")
+const mongoose = require("mongoose")
+const Restaurant = require("./models/restaurant")
+
+// setup Application
 const app = express()
 const port = 3000
 
-const exphbs = require("express-handlebars")
+// setup DB connection
+mongoose.connect("mongodb://localhost/restaurant-list", { useNewUrlParser: true, useUnifiedTopology: true })
+const db = mongoose.connection
 
-const restaurantData = require("./restaurant.json")
+db.on("error", () => {
+  console.log("mongodb error!")
+})
 
-// setting template engine
+db.once("open", () => {
+  console.log("mongodb connected!")
+})
+
+// setup template engine
 app.engine("hbs", exphbs({ extname: "hbs", defaultLayout: "main" }))
 app.set("view engine", "hbs")
 
+// setup static-file path
 app.use(express.static("public"))
 
-// 所有餐廳清單
+// route: 所有餐廳清單
 app.get("/", (req, res) => {
-  res.render("index", { restaurants: restaurantData.results })
+  Restaurant.find()
+    .lean()
+    .then((restaurants) => res.render("index", { restaurants }))
+    .catch((error) => console.error(error))
 })
 
-// 餐廳詳細資料頁面
+// route: 餐廳詳細資料頁面
 app.get("/restaurants/:id", (req, res) => {
-  const restaurant = restaurantData.results.find((restaurant) => restaurant.id.toString() === req.params.id)
-  res.render("show", { restaurant })
+  const id = Number(req.params.id)
+  return Restaurant.find({ id })
+    .lean()
+    .then((restaurant) => {
+      console.log(restaurant[0])
+      return res.render("show", { restaurant: restaurant[0] })
+    })
+    .catch((error) => console.log(error))
 })
 
-// 搜尋餐廳類別、餐廳店名
+// route: 搜尋餐廳類別、餐廳店名
 app.get("/search", (req, res) => {
   const keyword = req.query.keyword
-  const lowerCaseKeyword = keyword.toLowerCase()
-  const restaurants = restaurantData.results.filter((restaurant) => {
-    return restaurant.name.toLowerCase().includes(lowerCaseKeyword) || restaurant.category.toLowerCase().includes(lowerCaseKeyword)
-  })
-  res.render("index", { restaurants, keyword })
+  return Restaurant.find({ $or: [{ name: { $regex: keyword, $options: "i" } }, { category: { $regex: keyword, $options: "i" } }] })
+    .lean()
+    .then((restaurants) => res.render("index", { restaurants: restaurants, keyword: keyword }))
+    .catch((error) => console.log(error))
 })
 
 // Listen the server when it started
