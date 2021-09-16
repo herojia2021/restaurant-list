@@ -1,0 +1,58 @@
+<div class="container mt-5 restaurant-new-form">
+  <form action="/restaurants" method="POST">
+    <div class="form-group">
+      <label for="name">店名</label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="輸入店名" required />
+    </div>
+    <div class="form-group">
+      <label for="name_en">英文店名</label>
+      <input type="text" class="form-control" id="name_en" name="name_en" placeholder="輸入英文店名" required />
+    </div>
+    <div class="form-group">
+      <label for="category" class="form-label">餐廳類別</label>
+      <input class="form-control" list="categoryOptions" id="category" name="category" placeholder="輸入餐廳類別" required />
+      <datalist id="categoryOptions">
+        <option value="中東料理"></option>
+        <option value="日本料理"></option>
+        <option value="義式餐廳"></option>
+        <option value="美式"></option>
+        <option value="酒吧"></option>
+        <option value="咖啡"></option>
+      </datalist>
+    </div>
+    <div class="form-group">
+      <label for="image">圖片網址</label>
+      <input type="url" class="form-control" id="image" name="image" placeholder="輸入圖片網址 https://.*" pattern="https://.*" required />
+    </div>
+    <div class="form-group">
+      <label for="location">地址</label>
+      <input type="text" class="form-control" id="location" name="location" placeholder="輸入地址" required />
+    </div>
+    <div class="form-group">
+      <label for="phone">電話</label>
+      <input type="text" class="form-control" id="phone" name="phone" placeholder="輸入電話" required />
+    </div>
+    <div class="form-group">
+      <label for="google_map">Google Map 網址</label>
+      <input
+        type="url"
+        class="form-control"
+        id="google_map"
+        name="google_map"
+        placeholder="輸入 Google Map 網址 https://goo.gl/maps/.*"
+        pattern="https://goo.gl/maps/.*"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="rating">評分</label>
+      <input type="number" step="0.1" min="0" max="5" class="form-control" id="rating" name="rating" placeholder="輸入評分" required />
+    </div>
+    <div class="form-group">
+      <label for="description">介紹</label>
+      <input type="textarea" class="form-control" id="description" name="description" placeholder="輸入介紹" required />
+    </div>
+    <button type="submit" class="btn btn-primary">新增</button>
+    <a href="/" class="btn btn-primary">返回</a>
+  </form>
+</div>
