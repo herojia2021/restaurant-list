@@ -29,5 +29,4 @@ db.once("open", () => {
   })
 
   console.log("Seed data created. Exit.")
-  process.exit()
 })
