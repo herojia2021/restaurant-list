@@ -8,11 +8,15 @@
 - 查看餐廳的詳細資料
 - 以店名查詢餐廳
 - 以類別查詢餐廳
+- 新增餐廳資料
+- 修改餐廳資料
+- 刪除餐廳資料
 
 ### 需求
 
 - Node.js & npm
 - port 3000
+- MongoDB
 - Nodemon (optional)
 
 ### 安裝
@@ -50,3 +54,4 @@ npm run start
 
 - [Express](https://www.npmjs.com/package/express) - Framework
 - [Express-Handlebars](https://www.npmjs.com/package/express-handlebars) - Template Engine
+- [Mongoose](https://www.npmjs.com/package/mongoose) - ODM
