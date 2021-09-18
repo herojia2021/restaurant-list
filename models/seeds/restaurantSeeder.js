@@ -1,19 +1,9 @@
-const mongoose = require("mongoose")
 const Restaurant = require("../restaurant")
+const db = require("../../config/mongoose")
 
 const restaurantData = require("./restaurant.json")
 
-mongoose.connect("mongodb://localhost/restaurant-list", { useNewUrlParser: true, useUnifiedTopology: true })
-
-const db = mongoose.connection
-
-db.on("error", () => {
-  console.log("mongodb error!")
-})
-
 db.once("open", () => {
-  console.log("mongodb connected!")
-
   restaurantData.results.forEach((element) => {
     Restaurant.create({
       name: element.name,
@@ -28,5 +18,5 @@ db.once("open", () => {
     })
   })
 
-  console.log("Seed data created. Exit.")
+  console.log("Seed data created. Ctrl+C to Exit.")
 })
