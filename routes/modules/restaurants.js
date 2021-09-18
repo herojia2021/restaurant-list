@@ -5,10 +5,18 @@ const Restaurant = require("../../models/restaurant")
 
 // route: 搜尋餐廳API
 router.get("/search", (req, res) => {
+  // 取得查詢關鍵字
   const keyword = req.query.keyword
+  // 設定顯示按鈕
+  const uiConfig = {
+    showNew: false, //新增按鈕
+    showSort: false, //排序選項
+    showReturn: true, //返回按鈕
+  }
+
   return Restaurant.find({ $or: [{ name: { $regex: keyword, $options: "i" } }, { category: { $regex: keyword, $options: "i" } }] })
     .lean()
-    .then((restaurants) => res.render("index", { restaurants, keyword }))
+    .then((restaurants) => res.render("index", { restaurants, keyword, uiConfig }))
     .catch((error) => console.log(error))
 })
 

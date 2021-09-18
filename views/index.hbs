@@ -24,8 +24,9 @@
 </div>
 <div class="container mt-3">
   <div class="form-inline function-bar text-right">
-    <a class="btn btn-primary" href="/restaurants/new"><i class="fas fa-plus"> 新增</i></a>
-    <form class="my-0" action="/" method="GET" id="sort-form">
+    <a class="btn btn-primary {{#unless uiConfig.showNew}}d-none{{/unless}}" href="/restaurants/new"><i class="fas fa-plus"> 新增</i></a>
+    <a class="btn btn-primary {{#unless uiConfig.showReturn}}d-none{{/unless}}" href="/"><i class="fas fa-undo-alt"> 返回</i></a>
+    <form class="my-0 {{#unless uiConfig.showSort}}d-none{{/unless}} action="/" method="GET" id="sort-form">
       <div class="input-group ml-2">
         <select class="custom-select custom-select-sm" name="sort" id="sort-combo" onchange="sort-form.submit()">
           <option value="a-z" {{#if sort.a-z}}selected{{/if}}>A->Z</option>
@@ -91,7 +92,6 @@
   <!-- nothing to display -->
   <div class="d-flex flex-column align-items-center mt-5">
     <h1 class="h1">😱竟然有我不知道的美食</h1>
-    <a class="btn btn-info mt-3" href="/">返回首頁</a>
   </div>
 
 {{/if}}
