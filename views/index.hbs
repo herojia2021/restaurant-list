@@ -22,8 +22,24 @@
     </div>
   </div>
 </div>
-<div class="container mt-3 text-center">
-  <a class="btn btn-primary" href="/restaurants/new"><i class="fas fa-plus"> 新增</i></a>
+<div class="container mt-3">
+  <div class="form-inline function-bar text-right">
+    <a class="btn btn-primary" href="/restaurants/new"><i class="fas fa-plus"> 新增</i></a>
+    <form class="my-0" ction="/" method="GET" id="sort-form">
+      <div class="input-group ml-2">
+        <select class="custom-select custom-select-sm" name="sort" id="sort-combo" onchange="sort-form.submit()">
+          <option value="a-z" {{#if sort.a-z}}selected{{/if}}>A->Z</option>
+          <option value="z-a" {{#if sort.z-a}}selected{{/if}}>Z->A</option>
+          <option value="category" {{#if sort.category}}selected{{/if}}>類別</option>
+          <option value="location" {{#if sort.location}}selected{{/if}}>地址</option>
+          <option value="rating" {{#if sort.rating}}selected{{/if}}>評分</option>
+        </select>
+        <div class="input-group-append">
+          <label class="input-group-text custom-select-sm" for="sort-combo">排序</label>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
 {{#if restaurants}}
 

@@ -99,3 +99,8 @@ header {
     height: auto;
   }
 }
+
+.function-bar {
+  margin: 0 auto;
+  max-width: 680px;
+}
