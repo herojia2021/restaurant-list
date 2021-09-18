@@ -3,6 +3,7 @@ const exphbs = require("express-handlebars")
 const mongoose = require("mongoose")
 const Restaurant = require("./models/restaurant")
 const bodyParser = require("body-parser")
+const methodOverride = require("method-override")
 
 // setup Application
 const app = express()
@@ -29,6 +30,8 @@ app.use(express.static("public"))
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
+app.use(methodOverride("_method"))
+
 // route: 所有餐廳清單
 app.get("/", (req, res) => {
   Restaurant.find()
@@ -42,11 +45,7 @@ app.get("/restaurants/new", (req, res) => {
 })
 
 app.post("/restaurants", (req, res) => {
-  let newRestaurant = {}
-  for (const [key, value] of Object.entries(req.body)) {
-    newRestaurant[key] = value
-  }
-  return Restaurant.create(newRestaurant)
+  return Restaurant.create(req.body)
     .then(() => res.redirect("/"))
     .catch((error) => console.log(error))
 })
@@ -77,7 +76,7 @@ app.get("/restaurants/:id/edit", (req, res) => {
     .catch((error) => console.log(error))
 })
 
-app.post("/restaurants/:id/edit", (req, res) => {
+app.put("/restaurants/:id", (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .then((restaurant) => {
@@ -90,7 +89,7 @@ app.post("/restaurants/:id/edit", (req, res) => {
     .catch((error) => console.log(error))
 })
 
-app.post("/restaurants/:id/delete", (req, res) => {
+app.delete("/restaurants/:id", (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .then((restaurant) => restaurant.remove())
