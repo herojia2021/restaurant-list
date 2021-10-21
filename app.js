@@ -7,6 +7,8 @@ const methodOverride = require("method-override")
 const routes = require("./routes")
 require("./config/mongoose")
 
+const usePassport = require("./config/passport")
+
 // setup Application
 const app = express()
 const port = 3000
@@ -29,6 +31,9 @@ app.use(express.static("public"))
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(methodOverride("_method"))
+
+// 呼叫 Passport 函式並傳入 app，要在路由之前
+usePassport(app)
 
 app.use(routes)
 
