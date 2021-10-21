@@ -1,4 +1,5 @@
 const express = require("express")
+const session = require("express-session")
 const exphbs = require("express-handlebars")
 const bodyParser = require("body-parser")
 const methodOverride = require("method-override")
@@ -13,6 +14,14 @@ const port = 3000
 // setup template engine
 app.engine("hbs", exphbs({ extname: "hbs", defaultLayout: "main" }))
 app.set("view engine", "hbs")
+
+app.use(
+  session({
+    secret: "ThisIsMySecret",
+    resave: false,
+    saveUninitialized: true,
+  })
+)
 
 // setup static-file path
 app.use(express.static("public"))
