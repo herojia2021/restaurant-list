@@ -41,7 +41,7 @@ usePassport(app)
 app.use(flash())
 
 app.use((req, res, next) => {
-  // 保留驗証結果供view使用
+  // 保留使用者登入狀態供view使用
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.user = req.user
   res.locals.success_msg = req.flash("success_msg") // 設定 success_msg 訊息
