@@ -1,9 +1,12 @@
 # 餐廳清單
 
-收集了各地受歡迎的餐廳
+餐廳書籤服務, 附有帳號機制, 可以搜集喜歡的餐廳清單
 
 ## 功能列表
 
+- 帳號密碼登入
+- Facebook 登入
+- 雜湊加密密碼
 - 新增餐廳資料
 - 刪除餐廳資料
 - 修改餐廳資料
@@ -18,7 +21,7 @@
 - Node.js & npm
 - port 3000
 - MongoDB
-- Nodemon (optional)
+- Facebook Application ID、SecretID
 
 ### 安裝
 
@@ -57,7 +60,7 @@ npm run start
 
 ![首頁](/public/img/index.jpg)
 
-## 相依套件
+## 主要套件
 
 - [Express](https://www.npmjs.com/package/express) - Framework
 - [Express-Handlebars](https://www.npmjs.com/package/express-handlebars) - Template Engine
