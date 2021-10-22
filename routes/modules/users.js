@@ -26,10 +26,11 @@ router.get("/register", (req, res) => {
 // request register
 router.post("/register", (req, res) => {
   // 取得註冊表單參數
-  const { name, email, password, confirmPassword } = req.body
+  const { email, password, confirmPassword } = req.body
+  const name = req.body.name || email // 姓名非必填, 若未填代入信箱
   const errors = []
-  if (!name || !email || !password || !confirmPassword) {
-    errors.push({ message: "所有欄位都是必填。" })
+  if (!email || !password || !confirmPassword) {
+    errors.push({ message: "請填入信箱及密碼。" })
   }
   if (password !== confirmPassword) {
     errors.push({ message: "密碼與確認密碼不相符！" })
@@ -37,7 +38,7 @@ router.post("/register", (req, res) => {
   if (errors.length) {
     return res.render("register", {
       errors,
-      name,
+      name: req.body.name, // 姓名非必填, 若未填會代入信箱註冊, 但註冊失敗不會代回表單
       email,
       password,
       confirmPassword,
@@ -50,7 +51,7 @@ router.post("/register", (req, res) => {
       errors.push({ message: "這個 Email 已經註冊過了。" })
       res.render("register", {
         errors,
-        name,
+        name: req.body.name, // 姓名非必填, 若未填會代入信箱註冊, 但註冊失敗不會代回表單
         email,
         password,
         confirmPassword,
