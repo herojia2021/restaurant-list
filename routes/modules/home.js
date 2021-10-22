@@ -24,7 +24,10 @@ router.get("/", (req, res) => {
   // 提供boolean資訊給handlebars helper, 設定sort選項
   const sort = sortValStr ? { [sortValStr]: true } : { "a-z": true }
 
-  Restaurant.find()
+  // 只顯示登入者的資料
+  const userId = req.user._id
+
+  Restaurant.find({ userId })
     .lean()
     .sort(queryObj[sortValStr]) // desc
     .then((restaurants) => res.render("index", { restaurants, sort, uiConfig }))
