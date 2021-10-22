@@ -3,3 +3,4 @@
 .eslintrc.json
 .DS_Store
 .prettierrc
+.env
