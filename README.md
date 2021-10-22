@@ -41,13 +41,20 @@ cd restaurant-list
 npm install
 ```
 
-3.匯入種子資料
+3.設定環境變數
+
+```
+．將.env.example 更名為 .env
+．編輯.env, 填入 Facebook Application ID, Secret
+```
+
+4.匯入種子資料
 
 ```
 npm run seed
 ```
 
-4.開啟程式
+5.開啟程式
 
 ```
 npm run start
