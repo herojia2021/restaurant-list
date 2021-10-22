@@ -60,8 +60,6 @@ npm run start
 
 ![首頁](/public/img/index.jpg)
 
-## 主要套件
+## 其它說明
 
-- [Express](https://www.npmjs.com/package/express) - Framework
-- [Express-Handlebars](https://www.npmjs.com/package/express-handlebars) - Template Engine
-- [Mongoose](https://www.npmjs.com/package/mongoose) - ODM
+- 使用下載版本 BootStrap 4.x
